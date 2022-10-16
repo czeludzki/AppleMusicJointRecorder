@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		007E1B9D6E44A91372F94247 /* Pods_ApM_Expense_Caculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3B4C445D13C4E2BF73BC9C /* Pods_ApM_Expense_Caculator.framework */; };
+		435184A228F9CFD100428350 /* ApM_Expense_CaculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184A128F9CFD100428350 /* ApM_Expense_CaculatorApp.swift */; };
+		435184A428F9CFD100428350 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184A328F9CFD100428350 /* MainView.swift */; };
+		435184A628F9CFD300428350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435184A528F9CFD300428350 /* Assets.xcassets */; };
+		435184A928F9CFD300428350 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435184A828F9CFD300428350 /* Preview Assets.xcassets */; };
+		435184B028F9D54100428350 /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184AF28F9D54100428350 /* VM.swift */; };
+		435184B228F9E43500428350 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B128F9E43500428350 /* Model.swift */; };
+		435184B428FB281400428350 /* MemberEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B328FB281400428350 /* MemberEditorView.swift */; };
+		435184B628FB28E700428350 /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B528FB28E700428350 /* CommonViews.swift */; };
+		435184B828FB2E2A00428350 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B728FB2E2A00428350 /* Date+.swift */; };
+		435184BA28FC263800428350 /* MemberListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B928FC263800428350 /* MemberListView.swift */; };
+		435184BC28FC266900428350 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184BB28FC266900428350 /* ProductListView.swift */; };
+		435184BE28FC371A00428350 /* ProductEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184BD28FC371900428350 /* ProductEditorView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		12360F899D0C308F9EA4F5F7 /* Pods-ApM Expense Caculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApM Expense Caculator.release.xcconfig"; path = "Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator.release.xcconfig"; sourceTree = "<group>"; };
+		4351849E28F9CFD100428350 /* ApM Expense Caculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ApM Expense Caculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		435184A128F9CFD100428350 /* ApM_Expense_CaculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApM_Expense_CaculatorApp.swift; sourceTree = "<group>"; };
+		435184A328F9CFD100428350 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		435184A528F9CFD300428350 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		435184A828F9CFD300428350 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		435184AF28F9D54100428350 /* VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
+		435184B128F9E43500428350 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		435184B328FB281400428350 /* MemberEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditorView.swift; sourceTree = "<group>"; };
+		435184B528FB28E700428350 /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+		435184B728FB2E2A00428350 /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		435184B928FC263800428350 /* MemberListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListView.swift; sourceTree = "<group>"; };
+		435184BB28FC266900428350 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		435184BD28FC371900428350 /* ProductEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEditorView.swift; sourceTree = "<group>"; };
+		86245D2AC2C89FB677A10DF8 /* Pods-ApM Expense Caculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApM Expense Caculator.debug.xcconfig"; path = "Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator.debug.xcconfig"; sourceTree = "<group>"; };
+		FD3B4C445D13C4E2BF73BC9C /* Pods_ApM_Expense_Caculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApM_Expense_Caculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4351849B28F9CFD100428350 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007E1B9D6E44A91372F94247 /* Pods_ApM_Expense_Caculator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4351849528F9CFD100428350 = {
+			isa = PBXGroup;
+			children = (
+				435184A028F9CFD100428350 /* ApM Expense Caculator */,
+				4351849F28F9CFD100428350 /* Products */,
+				595200ABD2CC7A5FAE402D0D /* Pods */,
+				BB7E72B28446141A2DC349A2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4351849F28F9CFD100428350 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4351849E28F9CFD100428350 /* ApM Expense Caculator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		435184A028F9CFD100428350 /* ApM Expense Caculator */ = {
+			isa = PBXGroup;
+			children = (
+				435184B728FB2E2A00428350 /* Date+.swift */,
+				435184A128F9CFD100428350 /* ApM_Expense_CaculatorApp.swift */,
+				435184AF28F9D54100428350 /* VM.swift */,
+				435184B128F9E43500428350 /* Model.swift */,
+				435184B528FB28E700428350 /* CommonViews.swift */,
+				435184B328FB281400428350 /* MemberEditorView.swift */,
+				435184BD28FC371900428350 /* ProductEditorView.swift */,
+				435184BB28FC266900428350 /* ProductListView.swift */,
+				435184B928FC263800428350 /* MemberListView.swift */,
+				435184A328F9CFD100428350 /* MainView.swift */,
+				435184A528F9CFD300428350 /* Assets.xcassets */,
+				435184A728F9CFD300428350 /* Preview Content */,
+			);
+			path = "ApM Expense Caculator";
+			sourceTree = "<group>";
+		};
+		435184A728F9CFD300428350 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				435184A828F9CFD300428350 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		595200ABD2CC7A5FAE402D0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				86245D2AC2C89FB677A10DF8 /* Pods-ApM Expense Caculator.debug.xcconfig */,
+				12360F899D0C308F9EA4F5F7 /* Pods-ApM Expense Caculator.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BB7E72B28446141A2DC349A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD3B4C445D13C4E2BF73BC9C /* Pods_ApM_Expense_Caculator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4351849D28F9CFD100428350 /* ApM Expense Caculator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 435184AC28F9CFD300428350 /* Build configuration list for PBXNativeTarget "ApM Expense Caculator" */;
+			buildPhases = (
+				EC3AC706220A703605315DE3 /* [CP] Check Pods Manifest.lock */,
+				4351849A28F9CFD100428350 /* Sources */,
+				4351849B28F9CFD100428350 /* Frameworks */,
+				4351849C28F9CFD100428350 /* Resources */,
+				7A50A1D53ACBD8D7B3BD3072 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ApM Expense Caculator";
+			productName = "ApM Expense Caculator";
+			productReference = 4351849E28F9CFD100428350 /* ApM Expense Caculator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4351849628F9CFD100428350 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					4351849D28F9CFD100428350 = {
+						CreatedOnToolsVersion = 14.0;
+					};
+				};
+			};
+			buildConfigurationList = 4351849928F9CFD100428350 /* Build configuration list for PBXProject "ApM Expense Caculator" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4351849528F9CFD100428350;
+			productRefGroup = 4351849F28F9CFD100428350 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4351849D28F9CFD100428350 /* ApM Expense Caculator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4351849C28F9CFD100428350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435184A928F9CFD300428350 /* Preview Assets.xcassets in Resources */,
+				435184A628F9CFD300428350 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7A50A1D53ACBD8D7B3BD3072 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC3AC706220A703605315DE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ApM Expense Caculator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4351849A28F9CFD100428350 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				435184B828FB2E2A00428350 /* Date+.swift in Sources */,
+				435184BE28FC371A00428350 /* ProductEditorView.swift in Sources */,
+				435184B428FB281400428350 /* MemberEditorView.swift in Sources */,
+				435184B628FB28E700428350 /* CommonViews.swift in Sources */,
+				435184B228F9E43500428350 /* Model.swift in Sources */,
+				435184A428F9CFD100428350 /* MainView.swift in Sources */,
+				435184A228F9CFD100428350 /* ApM_Expense_CaculatorApp.swift in Sources */,
+				435184BC28FC266900428350 /* ProductListView.swift in Sources */,
+				435184BA28FC263800428350 /* MemberListView.swift in Sources */,
+				435184B028F9D54100428350 /* VM.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		435184AA28F9CFD300428350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		435184AB28F9CFD300428350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		435184AD28F9CFD300428350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86245D2AC2C89FB677A10DF8 /* Pods-ApM Expense Caculator.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ApM Expense Caculator/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YG2N89PSR;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.czeludzki.ApM-Expense-Caculator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		435184AE28F9CFD300428350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12360F899D0C308F9EA4F5F7 /* Pods-ApM Expense Caculator.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ApM Expense Caculator/Preview Content\"";
+				DEVELOPMENT_TEAM = 5YG2N89PSR;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.czeludzki.ApM-Expense-Caculator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4351849928F9CFD100428350 /* Build configuration list for PBXProject "ApM Expense Caculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435184AA28F9CFD300428350 /* Debug */,
+				435184AB28F9CFD300428350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		435184AC28F9CFD300428350 /* Build configuration list for PBXNativeTarget "ApM Expense Caculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435184AD28F9CFD300428350 /* Debug */,
+				435184AE28F9CFD300428350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4351849628F9CFD100428350 /* Project object */;
+}

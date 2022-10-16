@@ -1,0 +1,6 @@
+framework module Pods_ApM_Expense_Caculator {
+  umbrella header "Pods-ApM Expense Caculator-umbrella.h"
+
+  export *
+  module * { export * }
+}

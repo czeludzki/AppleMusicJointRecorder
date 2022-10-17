@@ -37,22 +37,26 @@ struct MainView: View {
                 ProductListView()
                     .navigationBarTitle(Text("Product"))
                     .navigationViewStyle(.stack)
-                    .navigationBarItems(trailing: HStack {
-                        Button.init {
-                            self.isProductEditorPresented.toggle()
-                        } label: {
-                            VStack {
-                                Image(systemName: "plus.circle")
-                                Text("New Product").font(.system(size: 11, weight: .semibold))
+                    .toolbar(content: {
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            Button.init {
+                                self.isProductEditorPresented.toggle()
+                            } label: {
+                                VStack {
+                                    Image(systemName: "plus.circle")
+                                    Text("New Product").font(.system(size: 11, weight: .semibold))
+                                }
+                            }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
+                                
                             }
-                        }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
-                            ProductEditorView(product: self.$vm.products.first)
                         }
                     })
             }.tabItem {
                 Text("Product")
                 Image(systemName: "person.crop.circle")
             }
+        }.onAppear {
+            self.vm.loadData()
         }
     }
 }

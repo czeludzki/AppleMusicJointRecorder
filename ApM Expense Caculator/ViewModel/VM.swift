@@ -31,11 +31,9 @@ class VM: ObservableObject {
         } catch let err as NSError {
             fatalError("createDataStoreFolderIfNeed err: \(err.localizedDescription), code: \(err.code)")
         }
-        // 加载所有
-        self.loadData()
         // TODO: 更新 Member 状态: 过期状态
         // 分组
-        self.$allMembers.debounce(for: 0.1, scheduler: DispatchQueue.main).sink { [weak self] allMembers in
+        self.$allMembers.debounce(for: 0.1, scheduler: DispatchQueue.main).throttle(for: 0.1, scheduler: DispatchQueue.main, latest: true).sink { [weak self] allMembers in
             self?.expiredMembers = allMembers.filter({ $0.memberStatus == .expire }).sorted(by: {
                 guard let m0_endDate = $0.records.first?.dealEndDate, let m1_endDate = $1.records.first?.dealEndDate else { return true }
                 return m0_endDate > m1_endDate
@@ -52,8 +50,6 @@ class VM: ObservableObject {
                 return m0_endDate < m1_endDate
             })
         }.store(in: &self.anyCancellabel)
-        
-        print(Period.allCases)
     }
     
     @Published private var allMembers: [Member] = []

@@ -76,14 +76,9 @@
 			children = (
 				435184B728FB2E2A00428350 /* Date+.swift */,
 				435184A128F9CFD100428350 /* ApM_Expense_CaculatorApp.swift */,
-				435184AF28F9D54100428350 /* VM.swift */,
-				435184B128F9E43500428350 /* Model.swift */,
-				435184B528FB28E700428350 /* CommonViews.swift */,
-				435184B328FB281400428350 /* MemberEditorView.swift */,
-				435184BD28FC371900428350 /* ProductEditorView.swift */,
-				435184BB28FC266900428350 /* ProductListView.swift */,
-				435184B928FC263800428350 /* MemberListView.swift */,
-				435184A328F9CFD100428350 /* MainView.swift */,
+				C4866DEA28FD436600F6222D /* ViewModel */,
+				C4866DEB28FD436E00F6222D /* Models */,
+				C4866DEC28FD437700F6222D /* Views */,
 				435184A528F9CFD300428350 /* Assets.xcassets */,
 				435184A728F9CFD300428350 /* Preview Content */,
 			);
@@ -113,6 +108,35 @@
 				FD3B4C445D13C4E2BF73BC9C /* Pods_ApM_Expense_Caculator.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C4866DEA28FD436600F6222D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				435184AF28F9D54100428350 /* VM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4866DEB28FD436E00F6222D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				435184B128F9E43500428350 /* Model.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4866DEC28FD437700F6222D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				435184B528FB28E700428350 /* CommonViews.swift */,
+				435184B328FB281400428350 /* MemberEditorView.swift */,
+				435184BD28FC371900428350 /* ProductEditorView.swift */,
+				435184BB28FC266900428350 /* ProductListView.swift */,
+				435184B928FC263800428350 /* MemberListView.swift */,
+				435184A328F9CFD100428350 /* MainView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

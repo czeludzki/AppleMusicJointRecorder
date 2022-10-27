@@ -23,10 +23,7 @@ struct MainView: View {
                         Button.init {
                             
                         } label: {
-                            VStack {
-                                Image(systemName: "plus.circle")
-                                Text("New Member").font(.system(size: 11, weight: .semibold))
-                            }
+                            Text("New Member")
                         }
                     })
             }.tabItem {
@@ -42,10 +39,7 @@ struct MainView: View {
                             Button.init {
                                 self.isProductEditorPresented.toggle()
                             } label: {
-                                VStack {
-                                    Image(systemName: "plus.circle")
-                                    Text("New Product").font(.system(size: 11, weight: .semibold))
-                                }
+                                Text("New Product")
                             }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
                                 
                             }

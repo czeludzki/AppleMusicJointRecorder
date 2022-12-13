@@ -40,7 +40,9 @@ enum Period: Int, CaseIterable {
     }
 }
 
-struct Product: HandyJSON, Hashable {
+class Product: HandyJSON, Hashable {
+    
+    static func == (lhs: Product, rhs: Product) -> Bool { lhs.id == rhs.id }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.id.hashValue)
@@ -60,6 +62,15 @@ struct Product: HandyJSON, Hashable {
     var periodDescription: String {
         return String(self.numOfPeriod) + "✖️" + self.period.description
     }
+    
+    required init() {}
+    
+    init(name: String, numOfPeriod: Int, period: Period, price: Double) {
+        self.name = name
+        self.numOfPeriod = numOfPeriod
+        self.period = period
+        self.price = price
+    }
 }
 
 struct Remark {
@@ -67,7 +78,9 @@ struct Remark {
     var v: String
 }
 
-struct DealRecord: HandyJSON, Hashable {
+class DealRecord: HandyJSON, Hashable {
+    
+    required init() {}
     
     static func == (lhs: DealRecord, rhs: DealRecord) -> Bool { lhs.id == rhs.id }
     
@@ -117,7 +130,9 @@ enum MemberStatus: Int {
     case quit
 }
 
-struct Member: HandyJSON, Hashable {
+class Member: HandyJSON, Hashable {
+    
+    required init() {}
     
     static func == (lhs: Member, rhs: Member) -> Bool { lhs.id == rhs.id }
     
@@ -133,13 +148,22 @@ struct Member: HandyJSON, Hashable {
     var records: [DealRecord] = []
     
     // 续期
-    mutating func renewal(dealRecord: DealRecord) {
+    func renewal(dealRecord: DealRecord) {
         self.records.append(dealRecord)
         // 更新通知
         self.upgradeNotification()
     }
     
     func upgradeNotification() {
+        
+    }
+}
+
+
+// MARK: Store
+extension Collection where Element == Product {
+    func store() {
+        let jsonStr = self.toJSONString()
         
     }
 }

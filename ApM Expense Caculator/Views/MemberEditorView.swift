@@ -60,7 +60,7 @@ struct MemberEditorView: View {
 struct MemberEditorView_Previews: PreviewProvider {
     static var previews: some View {
         MemberEditorView(member: Binding<Member>.init(get: {
-            Member(name: "咸湿超")
+            Member.init()
         }, set: { _ in
             
         }))

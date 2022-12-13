@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductEditorView: View {
     
+    @EnvironmentObject var vm: VM
     @Binding var product: Product
     @Environment(\.dismiss) var dismiss
     
@@ -60,7 +61,8 @@ struct ProductEditorView: View {
             }, label: {
                 Image(systemName: "xmark")
             }), trailing: Button(action: {
-                
+                self.vm.saveProduct(self.product)
+                self.dismiss.callAsFunction()
             }, label: {
                 Text("Save")
             }))

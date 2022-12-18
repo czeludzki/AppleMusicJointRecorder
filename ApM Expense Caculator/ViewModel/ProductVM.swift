@@ -5,17 +5,34 @@
 //  Created by siuzeontou on 19/10/2022.
 //
 
+import SwiftUI
 import Foundation
 
 class ProductVM: ObservableObject {
     
     enum Operation {
-        case new(product: Product)
-        case save(product: Product)
-        case delete(productID: String)
+        case save
+        case delete
     }
     
-    @Published var product: Product = Product()
+    enum Status {
+        case idel
+    }
     
-    var operationPublisher: Combine.PassthroughSubject = Combine.PassthroughSubject<Operation, Never>()
+    @EnvironmentObject var vm: VM
+    
+    init(_ product: Product? = nil) {
+        self.product = product ?? Product.init()
+    }
+    
+    @Published var product: Product
+    
+    func operationHandling(_ operation: ProductVM.Operation) {
+        switch operation {
+        case .save:
+            break
+        case .delete:
+            break
+        }
+    }
 }

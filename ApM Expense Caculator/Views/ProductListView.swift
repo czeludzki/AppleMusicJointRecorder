@@ -10,11 +10,16 @@ import SwiftUI
 struct ProductListView: View {
     
     @EnvironmentObject var vm: VM
+    @State var isProductEditorPresented = false
     
     var body: some View {
         List {
-            ForEach(self.vm.products, id: \.self) {
-                ProductCell(product: $0)
+            ForEach(self.vm.products, id: \.self) { product in
+                ProductCell(product: product).onTapGesture {
+                    self.isProductEditorPresented.toggle()
+                }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
+                    ProductEditorView.init(productVM: ProductVM.init(product))
+                }
             }
         }
     }

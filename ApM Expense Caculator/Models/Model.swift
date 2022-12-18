@@ -162,6 +162,7 @@ class Member: HandyJSON, Hashable {
 
 // MARK: Store
 extension Collection where Element == Product {
+    
     func store() {
         let jsonStr = self.toJSONString()
         

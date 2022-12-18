@@ -76,20 +76,6 @@ class VM: ObservableObject {
         }
     }
     
-    @Published var tempNewProduct: Product = Product()
-    func createTempProduct() {
-        self.tempNewProduct = Product()
-    }
-    
-    func saveProduct(_ product: Product) {
-        if let target = self.products.enumerated().filter({ $0.element == product }).first {
-            self.products[target.offset] = product
-        }else{
-            self.products.insert(product, at: 0)
-        }
-        self.storeData(Product.self)
-    }
-    
     // 插入member
     func insertMember(_ member: Member) throws {
         

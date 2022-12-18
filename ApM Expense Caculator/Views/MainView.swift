@@ -38,13 +38,12 @@ struct MainView: View {
                         ToolbarItemGroup(placement: .navigationBarTrailing) {
                             Button.init {
                                 // 创建一个临时 product
-                                self.vm.createTempProduct()
                                 self.isProductEditorPresented.toggle()
                             } label: {
                                 Text("New Product")
                             }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
                                 // 弹出视图
-                                ProductEditorView.init(product: self.$vm.tempNewProduct)
+                                ProductEditorView.init(productVM: ProductVM.init())
                             }
                         }
                     })

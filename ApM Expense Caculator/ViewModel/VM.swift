@@ -76,9 +76,20 @@ class VM: ObservableObject {
         }
     }
     
-    // 插入member
-    func insertMember(_ member: Member) throws {
+    // 保存 Member
+    func saveMember(_ member: Member) throws {
         
+    }
+    
+    // 保存 Product
+    func saveProduct(_ newProduct: Product) throws {
+        // 如果已经存在, 就先移除旧的
+        if let product = self.products.filter({ $0.id == newProduct.id }).first {
+            self.products.removeAll { $0.id == product.id }
+        }
+        self.products.insert(newProduct, at: 0)
+        // 持久化
+        self.storeData(Product.self)
     }
     
     func storeData(_ dataType: Any.Type) {

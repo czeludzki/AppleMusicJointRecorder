@@ -18,7 +18,7 @@ struct ProductListView: View {
                 ProductCell(product: product).onTapGesture {
                     self.isProductEditorPresented.toggle()
                 }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
-                    ProductEditorView.init(productVM: ProductVM.init(product))
+                    ProductEditorView.init(productVM: ProductVM.init(product, vm: self.vm))
                 }
             }
         }
@@ -35,11 +35,10 @@ struct ProductCell: View {
                 Text(self.product.name).font(.title)
             } trailingContent: {
                 VStack(alignment: .trailing) {
-                    Text(self.product.periodDescription)
-                    Text(String.init(format: "%.2f", self.product.price))
+                    Text(self.product.periodDescription).foregroundColor(Color.gray)
+                    Text(String.init(format: "%.2f", self.product.price)).foregroundColor(Color.gray)
                 }
             }
-            
         }
     }
 }

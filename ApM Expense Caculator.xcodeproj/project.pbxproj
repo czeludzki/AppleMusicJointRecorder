@@ -20,6 +20,7 @@
 		435184BA28FC263800428350 /* MemberListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184B928FC263800428350 /* MemberListView.swift */; };
 		435184BC28FC266900428350 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184BB28FC266900428350 /* ProductListView.swift */; };
 		435184BE28FC371A00428350 /* ProductEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435184BD28FC371900428350 /* ProductEditorView.swift */; };
+		C4190CEE29533D7C0070B6C8 /* MemberVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4190CED29533D7C0070B6C8 /* MemberVM.swift */; };
 		C4866DF0290025EB00F6222D /* ProductVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4866DEF290025EA00F6222D /* ProductVM.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		435184BB28FC266900428350 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		435184BD28FC371900428350 /* ProductEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEditorView.swift; sourceTree = "<group>"; };
 		86245D2AC2C89FB677A10DF8 /* Pods-ApM Expense Caculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApM Expense Caculator.debug.xcconfig"; path = "Target Support Files/Pods-ApM Expense Caculator/Pods-ApM Expense Caculator.debug.xcconfig"; sourceTree = "<group>"; };
+		C4190CED29533D7C0070B6C8 /* MemberVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVM.swift; sourceTree = "<group>"; };
 		C4866DEF290025EA00F6222D /* ProductVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVM.swift; sourceTree = "<group>"; };
 		FD3B4C445D13C4E2BF73BC9C /* Pods_ApM_Expense_Caculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApM_Expense_Caculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 			children = (
 				435184AF28F9D54100428350 /* VM.swift */,
 				C4866DEF290025EA00F6222D /* ProductVM.swift */,
+				C4190CED29533D7C0070B6C8 /* MemberVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4190CEE29533D7C0070B6C8 /* MemberVM.swift in Sources */,
 				435184B828FB2E2A00428350 /* Date+.swift in Sources */,
 				435184BE28FC371A00428350 /* ProductEditorView.swift in Sources */,
 				435184B428FB281400428350 /* MemberEditorView.swift in Sources */,

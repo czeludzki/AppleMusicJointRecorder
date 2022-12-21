@@ -162,9 +162,15 @@ class Member: HandyJSON, Hashable {
 
 // MARK: Store
 extension Collection where Element == Product {
-    
     func store() {
         let jsonStr = self.toJSONString()
-        
+        try? jsonStr?.write(to: VM.productInfoFileURL, atomically: true, encoding: .utf8)
+    }
+}
+
+extension Collection where Element == Member {
+    func store() {
+        let jsonStr = self.toJSONString()
+        try? jsonStr?.write(to: VM.memberInfoFileURL, atomically: true, encoding: .utf8)
     }
 }

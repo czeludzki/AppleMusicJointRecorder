@@ -43,7 +43,7 @@ struct MainView: View {
                                 Text("New Product")
                             }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
                                 // 弹出视图
-                                ProductEditorView.init(productVM: ProductVM.init())
+                                ProductEditorView.init(productVM: ProductVM.init(vm: self.vm))
                             }
                         }
                     })

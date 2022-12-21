@@ -5,7 +5,6 @@
 //  Created by siuzeontou on 19/10/2022.
 //
 
-import SwiftUI
 import Foundation
 
 class ProductVM: ObservableObject {
@@ -19,9 +18,10 @@ class ProductVM: ObservableObject {
         case idel
     }
     
-    @EnvironmentObject var vm: VM
+    weak var vm: VM?
     
-    init(_ product: Product? = nil) {
+    init(_ product: Product? = nil, vm: VM? = nil) {
+        self.vm = vm
         self.product = product ?? Product.init()
     }
     
@@ -30,7 +30,7 @@ class ProductVM: ObservableObject {
     func operationHandling(_ operation: ProductVM.Operation) {
         switch operation {
         case .save:
-            break
+            try? self.vm?.saveProduct(self.product)
         case .delete:
             break
         }

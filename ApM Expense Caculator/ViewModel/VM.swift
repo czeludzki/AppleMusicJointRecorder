@@ -9,12 +9,14 @@ import Foundation
 
 class VM: ObservableObject {
     
-    static let memberInfoFileName = "data.json"
+    static let memberInfoFileName = "members.json"
+    static let productInfoFileName = "products.json"
+    
+    static var productInfoFileURL: URL { Self.dataStoreFolder.appendingPathExtension(Self.productInfoFileName) }
+    static var memberInfoFileURL: URL { Self.dataStoreFolder.appendingPathExtension(Self.memberInfoFileName) }
     
     static let dataStoreFolder: URL = {
-        guard let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
-            fatalError("Can't access sandbox folder 'Documents'")
-        }
+        guard let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError("Can't access sandbox folder 'Documents'") }
         return URL.init(fileURLWithPath: documentDir).appendingPathComponent("/DataStore")
     }()
     
@@ -52,12 +54,19 @@ class VM: ObservableObject {
         }.store(in: &self.anyCancellabel)
     }
     
-    @Published private var allMembers: [Member] = []
+    @Published private var allMembers: [Member] = {
+        let res = try? String.init(contentsOf: VM.memberInfoFileURL)
+        return [Member].deserialize(from: res)?.compactMap({ $0 }) ?? []
+    }()
+    
     @Published var expiredMembers: [Member] = []
     @Published var normalMembers: [Member] = []
     @Published var quitedMembers: [Member] = []
     
-    @Published var products: [Product] = []
+    @Published var products: [Product] = {
+        let res = try? String.init(contentsOf: VM.productInfoFileURL)
+        return [Product].deserialize(from: res)?.compactMap({ $0 }) ?? []
+    }()
     
     // 加载所有数据
     func loadData() {
@@ -93,6 +102,13 @@ class VM: ObservableObject {
     }
     
     func storeData(_ dataType: Any.Type) {
-        
+        if dataType is Product.Type {
+            self.products.store()
+        }
+        if dataType is Member.Type {
+            let jsonStr = self.allMembers.toJSONString()
+            let path = Self.dataStoreFolder.appendingPathExtension(Self.memberInfoFileName)
+            try? jsonStr?.write(to: path, atomically: true, encoding: .utf8)
+        }
     }
 }

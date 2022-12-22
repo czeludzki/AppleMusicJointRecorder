@@ -86,8 +86,14 @@ class VM: ObservableObject {
     }
     
     // 保存 Member
-    func saveMember(_ member: Member) throws {
-        
+    func saveMember(_ newMember: Member) throws {
+        // 如果已经存在, 就先移除旧的
+        if let member = self.allMembers.filter({ $0.id == newMember.id }).first {
+            self.allMembers.removeAll { $0.id == member.id }
+        }
+        self.allMembers.insert(newMember, at: 0)
+        // 持久化
+        self.storeData(Member.self)
     }
     
     // 保存 Product
@@ -106,9 +112,7 @@ class VM: ObservableObject {
             self.products.store()
         }
         if dataType is Member.Type {
-            let jsonStr = self.allMembers.toJSONString()
-            let path = Self.dataStoreFolder.appendingPathExtension(Self.memberInfoFileName)
-            try? jsonStr?.write(to: path, atomically: true, encoding: .utf8)
+            self.allMembers.store()
         }
     }
 }

@@ -9,60 +9,73 @@ import SwiftUI
 
 struct MemberEditorView: View {
     
-    @Binding var member: Member
+    @EnvironmentObject var vm: VM
+    @ObservedObject var memberVM: MemberVM
+    @Environment(\.dismiss) var memberEditorViewDismiss
     
     var body: some View {
-        List {
-            Section {
-                Row {
-                    Text("Name:").foregroundColor(.gray)
-                } trailingContent: {
-                    TextField("Type User Name here", text: self.$member.name).multilineTextAlignment(.trailing).modifier(TextFieldClearButton.init(text: self.$member.name))
-                }
-                DatePicker.init("Join Date", selection: self.$member.joinDate, displayedComponents: [.date])
-            } footer: {
-                Text(self.member.id).font(.subheadline).foregroundColor(.gray).multilineTextAlignment(.center)
-            }
-            Section.init {
-                ForEach(self.member.records, id: \.self) { record in
-                    DealRecordCell(dealRecord: record)
-                }
-            } header: {
-                Row {
-                    Text("Deal Record")
-                } trailingContent: {
-                    Button("Add Record") {
-                        
-                    }
-                }
-            }
-            Section.init {
-                ForEach(["1","2","3","4"], id: \.self) { identifiable in
+        NavigationView {
+            List {
+                Section {
                     Row {
-                        Text(identifiable)
+                        Text("Name:").foregroundColor(.gray)
                     } trailingContent: {
-                        Text(identifiable)
+                        TextField("Type User Name here", text: self.$memberVM.member.name).multilineTextAlignment(.trailing).modifier(TextFieldClearButton.init(text: self.$memberVM.member.name))
+                    }
+                    DatePicker.init("Join Date", selection: self.$memberVM.member.joinDate, displayedComponents: [.date])
+                } footer: {
+                    Text(self.memberVM.member.id).font(.subheadline).foregroundColor(.gray).multilineTextAlignment(.center)
+                }
+                Section.init {
+                    ForEach(self.memberVM.member.records, id: \.self) { record in
+                        DealRecordCell(dealRecord: record)
+                    }
+                } header: {
+                    Row {
+                        Text("Deal Record")
+                    } trailingContent: {
+                        Button("Add Record") {
+                            
+                        }
                     }
                 }
-            } header: {
-                Row {
-                    Text("Remark")
-                } trailingContent: {
-                    Button("Add Remark") {
-                        
+                Section.init {
+                    ForEach(["1","2","3","4"], id: \.self) { identifiable in
+                        Row {
+                            Text(identifiable)
+                        } trailingContent: {
+                            Text(identifiable)
+                        }
+                    }
+                } header: {
+                    Row {
+                        Text("Remark")
+                    } trailingContent: {
+                        Button("Add Remark") {
+                            
+                        }
                     }
                 }
             }
+            .navigationBarTitle(Text("Member"))
+            .navigationBarItems(leading: Button(action: {
+                // 关闭
+                self.memberEditorViewDismiss.callAsFunction()
+            }, label: {
+                Image(systemName: "xmark")
+            }), trailing: Button(action: {
+                // 保存
+                self.memberVM.operationHandling(.save)
+                self.memberEditorViewDismiss.callAsFunction()
+            }, label: {
+                Text("Save")
+            }))
         }
     }
 }
 
 struct MemberEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        MemberEditorView(member: Binding<Member>.init(get: {
-            Member.init()
-        }, set: { _ in
-            
-        }))
+        MemberEditorView.init(memberVM: MemberVM.init())
     }
 }

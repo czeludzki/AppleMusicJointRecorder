@@ -12,6 +12,7 @@ struct MainView: View {
     @EnvironmentObject var vm: VM
     @State private var tabSelection: Int = 0
     @State private var isProductEditorPresented = false
+    @State private var isMemberEditorPresented = false
     
     var body: some View {
         TabView(selection: self.$tabSelection) {
@@ -21,9 +22,11 @@ struct MainView: View {
                     .navigationViewStyle(.stack)
                     .navigationBarItems(trailing: HStack {
                         Button.init {
-                            
+                            self.isMemberEditorPresented.toggle()
                         } label: {
                             Text("New Member")
+                        }.fullScreenCover(isPresented: self.$isMemberEditorPresented) {
+                            MemberEditorView.init(memberVM: MemberVM.init(vm: self.vm))
                         }
                     })
             }.tabItem {

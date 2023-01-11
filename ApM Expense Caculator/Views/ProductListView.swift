@@ -10,15 +10,15 @@ import SwiftUI
 struct ProductListView: View {
     
     @EnvironmentObject var vm: VM
-    @State var isProductEditorPresented = false
+    @State var selectedProduct: Product?
     
     var body: some View {
         List {
-            ForEach(self.vm.products, id: \.self) { product in
+            ForEach(self.$vm.products, id: \.self) { product in
                 ProductCell(product: product).onTapGesture {
-                    self.isProductEditorPresented.toggle()
-                }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
-                    ProductEditorView.init(productVM: ProductVM.init(product, vm: self.vm))
+                    self.selectedProduct = product.wrappedValue
+                }.fullScreenCover(item: self.$selectedProduct) { selectedProduct in
+                    ProductEditorView.init(productVM: ProductVM.init(selectedProduct, vm: self.vm))
                 }
             }
         }
@@ -27,7 +27,7 @@ struct ProductListView: View {
 
 struct ProductCell: View {
     
-    var product: Product
+    @Binding var product: Product
     
     var body: some View {
         VStack {

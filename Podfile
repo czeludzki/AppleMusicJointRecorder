@@ -7,7 +7,7 @@ target 'ApM Expense Caculator' do
   
   pod 'SnapKit'
   pod 'SwiftyJSON'
-  pod 'HandyJSON'
+  pod 'Codextended'
   # Pods for ApM Expense Caculator
 
 end

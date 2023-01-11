@@ -8,22 +8,46 @@
 import SwiftUI
 
 struct MemberListView: View {
+    
     @EnvironmentObject var vm: VM
+    @State var selectedMember: Member?
+    
     var body: some View {
         List {
             Section("Expired") {
-                ForEach(self.vm.expiredMembers, id: \.self) { m in
-                    MemberCell(member: m)
+                ForEach(self.$vm.expiredMembers, id: \.self) { m in
+                    MemberCell(member: m).onTapGesture {
+                        self.selectedMember = m.wrappedValue
+                    }.fullScreenCover(item: self.$selectedMember) { m in
+                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                    }
+                }
+            }
+            Section("Initial") {
+                ForEach(self.$vm.initialMembers, id: \.self) { m in
+                    MemberCell(member: m).onTapGesture {
+                        self.selectedMember = m.wrappedValue
+                    }.fullScreenCover(item: self.$selectedMember) { m in
+                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                    }
                 }
             }
             Section("Normal") {
-                ForEach(self.vm.normalMembers, id: \.self) { m in
-                    MemberCell(member: m)
+                ForEach(self.$vm.normalMembers, id: \.self) { m in
+                    MemberCell(member: m).onTapGesture {
+                        self.selectedMember = m.wrappedValue
+                    }.fullScreenCover(item: self.$selectedMember) { m in
+                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                    }
                 }
             }
             Section("Exited") {
-                ForEach(self.vm.quitedMembers, id: \.self) { m in
-                    MemberCell(member: m)
+                ForEach(self.$vm.quitedMembers, id: \.self) { m in
+                    MemberCell(member: m).onTapGesture {
+                        self.selectedMember = m.wrappedValue
+                    }.fullScreenCover(item: self.$selectedMember) { m in
+                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                    }
                 }
             }
         }
@@ -33,7 +57,7 @@ struct MemberListView: View {
 struct MemberCell: View {
     
     @State var isLatestDealRecordFold: Bool = false
-    var member: Member
+    @Binding var member: Member
     
     var body: some View {
         VStack {

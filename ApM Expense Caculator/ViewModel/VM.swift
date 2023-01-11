@@ -35,12 +35,16 @@ class VM: ObservableObject {
         }
         // TODO: 更新 Member 状态: 过期状态
         // 分组
-        self.$allMembers.debounce(for: 0.1, scheduler: DispatchQueue.main).throttle(for: 0.1, scheduler: DispatchQueue.main, latest: true).sink { [weak self] allMembers in
+        self.$allMembers.debounce(for: 0.5, scheduler: DispatchQueue.main).throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true).sink { [weak self] allMembers in
+            self?.initialMembers = allMembers.filter({ $0.memberStatus == .initial }).sorted(by: {
+                guard let m0_endDate = $0.records.first?.dealEndDate, let m1_endDate = $1.records.first?.dealEndDate else { return true }
+                return m0_endDate > m1_endDate
+            })
             self?.expiredMembers = allMembers.filter({ $0.memberStatus == .expire }).sorted(by: {
                 guard let m0_endDate = $0.records.first?.dealEndDate, let m1_endDate = $1.records.first?.dealEndDate else { return true }
                 return m0_endDate > m1_endDate
             })
-            self?.normalMembers = allMembers.filter({ $0.memberStatus == .normal || $0.memberStatus == .initial }).sorted(by: {
+            self?.normalMembers = allMembers.filter({ $0.memberStatus == .normal }).sorted(by: {
                 if let m0_endDate = $0.records.first?.dealEndDate, let m1_endDate = $1.records.first?.dealEndDate {
                     return m0_endDate > m1_endDate
                 }else{
@@ -55,17 +59,30 @@ class VM: ObservableObject {
     }
     
     @Published private var allMembers: [Member] = {
-        let res = try? String.init(contentsOf: VM.memberInfoFileURL)
-        return [Member].deserialize(from: res)?.compactMap({ $0 }) ?? []
+        guard let res = (try? String.init(contentsOf: VM.memberInfoFileURL))?.data(using: .utf8) else {
+            return []
+        }
+        do {
+            return try JSONDecoder().decode([Member].self, from: res)
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
     }()
     
+    @Published var initialMembers: [Member] = []
     @Published var expiredMembers: [Member] = []
     @Published var normalMembers: [Member] = []
     @Published var quitedMembers: [Member] = []
     
     @Published var products: [Product] = {
-        let res = try? String.init(contentsOf: VM.productInfoFileURL)
-        return [Product].deserialize(from: res)?.compactMap({ $0 }) ?? []
+        guard let res = (try? String.init(contentsOf: VM.productInfoFileURL))?.data(using: .utf8) else {
+            return []
+        }
+        do {
+            return try JSONDecoder().decode([Product].self, from: res)
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
     }()
     
     // 加载所有数据
@@ -73,11 +90,11 @@ class VM: ObservableObject {
         let enumerator = FileManager.default.enumerator(at: Self.dataStoreFolder, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants, .skipsPackageDescendants])
         while let folder = enumerator?.nextObject(), let folder = folder as? URL {
             let memberInfoFile = folder.appendingPathComponent(Self.memberInfoFileName, conformingTo: .text)
-            guard let memberInfoJsonString = try? String.init(contentsOfFile: memberInfoFile.path, encoding: .utf8) else {
+            guard let memberInfoJson = try? String.init(contentsOfFile: memberInfoFile.path, encoding: .utf8).data(using: .utf8) else {
                 print("\(self) loadData() try? String.init(contentsOfFile: memberInfoFile.path, encoding: .utf8) 出错")
                 continue
             }
-            guard let member = Member.deserialize(from: memberInfoJsonString) else {
+            guard let member = try? memberInfoJson.decoded(as: Member.self) else {
                 print("\(self) loadData() Member.deserialize(from: memberInfoJsonString) 失败")
                 continue
             }
@@ -109,10 +126,10 @@ class VM: ObservableObject {
     
     func storeData(_ dataType: Any.Type) {
         if dataType is Product.Type {
-            self.products.store()
+            try? self.products.store()
         }
         if dataType is Member.Type {
-            self.allMembers.store()
+            try? self.allMembers.store()
         }
     }
 }

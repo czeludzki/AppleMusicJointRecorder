@@ -15,7 +15,7 @@ struct Row<LeadingContent, TrailingContent>: View where LeadingContent: View, Tr
             leadingContent()
             Spacer()
             trailingContent()
-        }
+        }.contentShape(Rectangle())
     }
 }
 

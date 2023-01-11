@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Period: Int, CaseIterable {
+enum Period: Int, CaseIterable, Codable {
     case day
     case week
     case month
@@ -40,7 +40,7 @@ enum Period: Int, CaseIterable {
     }
 }
 
-class Product: HandyJSON, Hashable {
+struct Product: Codable, Hashable, Identifiable {
     
     static func == (lhs: Product, rhs: Product) -> Bool { lhs.id == rhs.id }
     
@@ -48,7 +48,7 @@ class Product: HandyJSON, Hashable {
         hasher.combine(self.id.hashValue)
     }
     
-    let id = UUID().uuidString
+    let id: String
     var name: String = ""
     // 周期数量.
     // 即允许用户设计一个为期半年(6个月)的商品. 此值可设置为 6, period = .month
@@ -63,30 +63,67 @@ class Product: HandyJSON, Hashable {
         return String(self.numOfPeriod) + "✖️" + self.period.description
     }
     
-    required init() {}
+    init(from decoder: Decoder) throws {
+        self.id = try decoder.decode("id")
+        self.name = (try? decoder.decode("name")) ?? ""
+        self.numOfPeriod = (try? decoder.decode("numOfPeriod")) ?? 0
+        self.period = (try? decoder.decode("period")) ?? .month
+        self.price = (try? decoder.decode("price")) ?? 0
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        try encoder.encode(self.id, for: "id")
+        try encoder.encode(self.name, for: "name")
+        try encoder.encode(self.numOfPeriod, for: "numOfPeriod")
+        try encoder.encode(self.period, for: "period")
+        try encoder.encode(self.price, for: "price")
+    }
     
     init(name: String, numOfPeriod: Int, period: Period, price: Double) {
+        self.id = UUID.init().uuidString
         self.name = name
         self.numOfPeriod = numOfPeriod
         self.period = period
         self.price = price
     }
+    
+    init() {
+        self.id = UUID.init().uuidString
+    }
 }
 
-struct Remark {
+struct Remark: Codable {
     var k: String
     var v: String
 }
 
-class DealRecord: HandyJSON, Hashable {
+struct DealRecord: Codable, Hashable, Identifiable {
     
-    required init() {}
+    init(from decoder: Decoder) throws {
+        self.id = try decoder.decode("id")
+        self.date = try decoder.decode("date", using: ISO8601DateFormatter.init())
+        self.dealStartDate = try decoder.decode("dealStartDate", using: ISO8601DateFormatter.init())
+        self.product = try decoder.decode("product")
+        self.numOfProduct = try decoder.decode("numOfProduct")
+        self.customPrice = try decoder.decode("customPrice")
+        self.remarks = try decoder.decode("remarks", as: [Remark].self)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        try encoder.encode(self.id, for: "id")
+        try encoder.encode(self.date, for: "date")
+        try encoder.encode(self.dealStartDate, for: "dealStartDate", using: ISO8601DateFormatter.init())
+        try encoder.encode(self.product, for: "product")
+        try encoder.encode(self.numOfProduct, for: "numOfProduct")
+        try encoder.encode(self.customPrice, for: "customPrice")
+        try encoder.encode(self.remarks, for: "remarks")
+    }
     
     static func == (lhs: DealRecord, rhs: DealRecord) -> Bool { lhs.id == rhs.id }
     
     func hash(into hasher: inout Hasher) { hasher.combine(self.id.hashValue) }
     
-    let id: String = UUID().uuidString
+    let id: String
     // 创建日期
     var date: Date = Date()
     // 交易生效日期
@@ -119,20 +156,42 @@ class DealRecord: HandyJSON, Hashable {
     }
 }
 
-enum MemberStatus: Int {
-    // 新建状态. 没有任何记录.
-    case initial
-    // 正常态
-    case normal
-    // 过期了
-    case expire
-    // 该member主动下车. 不再有关系了. 也不能对这种状态的 member 进行续费操作(添加 record 操作). 该类型的member只剩下留底的意义了.
-    case quit
+extension Member {
+    enum Status: Int, Codable, CaseIterable {
+        // 新建状态. 没有任何记录.
+        case initial
+        // 正常态
+        case normal
+        // 过期了
+        case expire
+        // 该member主动下车. 不再有关系了. 也不能对这种状态的 member 进行续费操作(添加 record 操作). 该类型的member只剩下留底的意义了.
+        case quit
+    }
 }
 
-class Member: HandyJSON, Hashable {
+struct Member: Codable, Hashable, Identifiable {
     
-    required init() {}
+    init(from decoder: Decoder) throws {
+        self.id = try decoder.decode("id")
+        self.name = try decoder.decode("name")
+        self.joinDate = try decoder.decode("joinDate", using: ISO8601DateFormatter.init())
+        self.memberStatus = try decoder.decode("memberStatus")
+        self.remarks = try decoder.decode("remarks")
+        self.records = try decoder.decode("records")
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        try encoder.encode(self.id, for: "id")
+        try encoder.encode(self.name, for: "name")
+        try encoder.encode(self.joinDate, for: "joinDate", using: ISO8601DateFormatter.init())
+        try encoder.encode(self.memberStatus, for: "memberStatus")
+        try encoder.encode(self.remarks, for: "remarks")
+        try encoder.encode(self.records, for: "records")
+    }
+    
+    init() {
+        self.id = UUID.init().uuidString
+    }
     
     static func == (lhs: Member, rhs: Member) -> Bool { lhs.id == rhs.id }
     
@@ -140,15 +199,15 @@ class Member: HandyJSON, Hashable {
         hasher.combine(self.id.hashValue)
     }
     
+    let id: String
     var name: String = ""
-    let id: String = UUID().uuidString
     var joinDate: Date = Date()
-    var memberStatus: MemberStatus = .initial
+    var memberStatus: Member.Status = .initial
     var remarks: [Remark] = []
     var records: [DealRecord] = []
     
     // 续期
-    func renewal(dealRecord: DealRecord) {
+    mutating func renewal(dealRecord: DealRecord) {
         self.records.append(dealRecord)
         // 更新通知
         self.upgradeNotification()
@@ -161,16 +220,26 @@ class Member: HandyJSON, Hashable {
 
 
 // MARK: Store
-extension Collection where Element == Product {
-    func store() {
-        let jsonStr = self.toJSONString()
-        try? jsonStr?.write(to: VM.productInfoFileURL, atomically: true, encoding: .utf8)
+extension Array where Element == Product {
+    func store() throws {
+        let data = try self.encoded()
+        let jsonStr = String.init(data: data, encoding: .utf8)
+        do {
+            try jsonStr?.write(to: VM.productInfoFileURL, atomically: true, encoding: .utf8)
+        } catch let err {
+            print("保存 Product 失败了", err)
+        }
     }
 }
 
-extension Collection where Element == Member {
-    func store() {
-        let jsonStr = self.toJSONString()
-        try? jsonStr?.write(to: VM.memberInfoFileURL, atomically: true, encoding: .utf8)
+extension Array where Element == Member {
+    func store() throws {
+        let data = try self.encoded()
+        let jsonStr = String.init(data: data, encoding: .utf8)
+        do {
+            try jsonStr?.write(to: VM.memberInfoFileURL, atomically: true, encoding: .utf8)
+        } catch let err {
+            print("保存 Member 失败了", err)
+        }
     }
 }

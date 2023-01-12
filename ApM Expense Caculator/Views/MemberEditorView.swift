@@ -12,6 +12,7 @@ struct MemberEditorView: View {
     @EnvironmentObject var vm: VM
     @ObservedObject var memberVM: MemberVM
     @Environment(\.dismiss) var memberEditorViewDismiss
+    @State var isRecordEditorViewPresent: Bool = false
     
     var body: some View {
         NavigationView {
@@ -35,16 +36,18 @@ struct MemberEditorView: View {
                         Text("Deal Record")
                     } trailingContent: {
                         Button("Add Record") {
-                            
+                            self.isRecordEditorViewPresent.toggle()
+                        }.fullScreenCover(isPresented: self.$isRecordEditorViewPresent) {
+                            RecordEditorView(recordVM: RecordVM.init(DealRecord.init(member: self.memberVM.member), member: self.memberVM.member))
                         }
                     }
                 }
                 Section.init {
-                    ForEach(["1","2","3","4"], id: \.self) { identifiable in
+                    ForEach(self.memberVM.member.remarks, id: \.self) { identifiable in
                         Row {
-                            Text(identifiable)
+                            Text(identifiable.k)
                         } trailingContent: {
-                            Text(identifiable)
+                            Text(identifiable.v)
                         }
                     }
                 } header: {

@@ -124,6 +124,17 @@ class VM: ObservableObject {
         self.storeData(Product.self)
     }
     
+    func saveDealRecord(_ record: DealRecord) throws {
+        // 将 record 保存到 某个 member
+        guard let member = self.allMembers.filter({ $0.id == record.member?.id }).first else { throw NSError.init(domain: "Member not exist", code: 1) }
+        if let targetRecord = member.records.filter({ $0.id == record.id }).first {
+            member.records.removeAll { $0.id == targetRecord.id }
+        }
+        member.records.insert(record, at: 0)
+        // 持久化
+        self.storeData(Member.self)
+    }
+    
     func storeData(_ dataType: Any.Type) {
         if dataType is Product.Type {
             try? self.products.store()

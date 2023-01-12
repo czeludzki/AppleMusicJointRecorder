@@ -40,7 +40,6 @@ struct MainView: View {
                     .toolbar(content: {
                         ToolbarItemGroup(placement: .navigationBarTrailing) {
                             Button.init {
-                                // 创建一个临时 product
                                 self.isProductEditorPresented.toggle()
                             } label: {
                                 Text("New Product")

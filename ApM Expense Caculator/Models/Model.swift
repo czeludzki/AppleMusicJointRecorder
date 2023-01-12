@@ -40,7 +40,7 @@ enum Period: Int, CaseIterable, Codable {
     }
 }
 
-struct Product: Codable, Hashable, Identifiable {
+class Product: Codable, Hashable, Identifiable, ObservableObject {
     
     static func == (lhs: Product, rhs: Product) -> Bool { lhs.id == rhs.id }
     
@@ -49,21 +49,21 @@ struct Product: Codable, Hashable, Identifiable {
     }
     
     let id: String
-    var name: String = ""
+    @Published var name: String = ""
     // 周期数量.
     // 即允许用户设计一个为期半年(6个月)的商品. 此值可设置为 6, period = .month
     // 同理也可让用户设计一个为期4周的商品. 此值可设置为 4, period = .week
-    var numOfPeriod: Int = 2
+    @Published var numOfPeriod: Int = 2
     // 商品有效周期
-    var period: Period = .month
+    @Published var period: Period = .month
     // 价格
-    var price: Double = 0
+    @Published var price: Double = 0
     
     var periodDescription: String {
         return String(self.numOfPeriod) + "✖️" + self.period.description
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         self.id = try decoder.decode("id")
         self.name = (try? decoder.decode("name")) ?? ""
         self.numOfPeriod = (try? decoder.decode("numOfPeriod")) ?? 0
@@ -92,26 +92,26 @@ struct Product: Codable, Hashable, Identifiable {
     }
 }
 
-struct Remark: Codable {
+struct Remark: Codable, Hashable {
     var k: String
     var v: String
 }
 
-struct DealRecord: Codable, Hashable, Identifiable {
+class DealRecord: Codable, Hashable, Identifiable {
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         self.id = try decoder.decode("id")
-        self.date = try decoder.decode("date", using: ISO8601DateFormatter.init())
+        self.creationDate = try decoder.decode("creationDate", using: ISO8601DateFormatter.init())
         self.dealStartDate = try decoder.decode("dealStartDate", using: ISO8601DateFormatter.init())
         self.product = try decoder.decode("product")
         self.numOfProduct = try decoder.decode("numOfProduct")
-        self.customPrice = try decoder.decode("customPrice")
+        self.customPrice = try? decoder.decode("customPrice")
         self.remarks = try decoder.decode("remarks", as: [Remark].self)
     }
     
     func encode(to encoder: Encoder) throws {
         try encoder.encode(self.id, for: "id")
-        try encoder.encode(self.date, for: "date")
+        try encoder.encode(self.creationDate, for: "creationDate", using: ISO8601DateFormatter.init())
         try encoder.encode(self.dealStartDate, for: "dealStartDate", using: ISO8601DateFormatter.init())
         try encoder.encode(self.product, for: "product")
         try encoder.encode(self.numOfProduct, for: "numOfProduct")
@@ -119,23 +119,30 @@ struct DealRecord: Codable, Hashable, Identifiable {
         try encoder.encode(self.remarks, for: "remarks")
     }
     
+    init(member: Member) {
+        self.id = UUID().uuidString
+        self.member = member
+    }
+    
     static func == (lhs: DealRecord, rhs: DealRecord) -> Bool { lhs.id == rhs.id }
     
     func hash(into hasher: inout Hasher) { hasher.combine(self.id.hashValue) }
     
     let id: String
+    // 用户
+    weak var member: Member?
     // 创建日期
-    var date: Date = Date()
+    @Published var creationDate: Date = Date()
     // 交易生效日期
-    var dealStartDate: Date = Date()
+    @Published var dealStartDate: Date = Date()
     // 产品
-    var product: Product = Product()
+    @Published var product: Product = Product()
     // 购买量
-    var numOfProduct: Int = 0
+    @Published var numOfProduct: Int = 0
     // 如果此值非空, 则价格计算方式为 直接取 customPrice
     // 如果此值为空, 则价格计算方式为 product.price * numOfProduct
-    var customPrice: Double?
-    var remarks: [Remark] = []
+    @Published var customPrice: Double?
+    @Published var remarks: [Remark] = []
     
     // MARK: Caculate
     // 本次交易的到期日期
@@ -150,9 +157,8 @@ struct DealRecord: Codable, Hashable, Identifiable {
     var totalPrice_str: String {
         if let customPrice = self.customPrice {
             return String.init(format: "%.2f", customPrice)
-        }else{
-            return String.init(format: "%.2f", product.price * Double(numOfProduct))
         }
+        return String.init(format: "%.2f", product.price * Double(numOfProduct))
     }
 }
 
@@ -169,15 +175,19 @@ extension Member {
     }
 }
 
-struct Member: Codable, Hashable, Identifiable {
+class Member: Codable, Hashable, Identifiable {
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         self.id = try decoder.decode("id")
         self.name = try decoder.decode("name")
         self.joinDate = try decoder.decode("joinDate", using: ISO8601DateFormatter.init())
         self.memberStatus = try decoder.decode("memberStatus")
         self.remarks = try decoder.decode("remarks")
         self.records = try decoder.decode("records")
+        
+        self.records.forEach {
+            $0.member = self
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -207,7 +217,7 @@ struct Member: Codable, Hashable, Identifiable {
     var records: [DealRecord] = []
     
     // 续期
-    mutating func renewal(dealRecord: DealRecord) {
+    func renewal(dealRecord: DealRecord) {
         self.records.append(dealRecord)
         // 更新通知
         self.upgradeNotification()

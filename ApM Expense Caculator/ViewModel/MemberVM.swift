@@ -16,11 +16,8 @@ class MemberVM: ObservableObject {
     enum Status {
         case idel
     }
-    
-    weak var vm: VM?
-    
-    init(_ member: Member? = nil, vm: VM? = nil) {
-        self.vm = vm
+        
+    init(_ member: Member? = nil) {
         self.member = member ?? Member.init()
     }
     
@@ -29,7 +26,7 @@ class MemberVM: ObservableObject {
     func operationHandling(_ operation: MemberVM.Operation) {
         switch operation {
         case .save:
-            try? self.vm?.saveMember(self.member)
+            try? VM.share.saveMember(self.member)
         case .delete:
             break
         }

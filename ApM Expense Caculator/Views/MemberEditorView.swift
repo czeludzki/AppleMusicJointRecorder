@@ -13,6 +13,7 @@ struct MemberEditorView: View {
     @ObservedObject var memberVM: MemberVM
     @Environment(\.dismiss) var memberEditorViewDismiss
     @State var isRecordEditorViewPresent: Bool = false
+    @State var isRemarkEditorViewPresent: Bool = false
     
     var body: some View {
         NavigationView {
@@ -38,7 +39,7 @@ struct MemberEditorView: View {
                         Button("Add Record") {
                             self.isRecordEditorViewPresent.toggle()
                         }.fullScreenCover(isPresented: self.$isRecordEditorViewPresent) {
-                            RecordEditorView(recordVM: RecordVM.init(DealRecord.init(member: self.memberVM.member), member: self.memberVM.member))
+                            RecordEditorView.init(recordVM: .init(DealRecord.init(member: self.memberVM.member)))
                         }
                     }
                 }
@@ -55,6 +56,8 @@ struct MemberEditorView: View {
                         Text("Remark")
                     } trailingContent: {
                         Button("Add Remark") {
+                            self.isRecordEditorViewPresent.toggle()
+                        }.fullScreenCover(isPresented: self.$isRemarkEditorViewPresent) {
                             
                         }
                     }

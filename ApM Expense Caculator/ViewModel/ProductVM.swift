@@ -17,11 +17,8 @@ class ProductVM: ObservableObject {
     enum Status {
         case idel
     }
-    
-    weak var vm: VM?
-    
-    init(_ product: Product? = nil, vm: VM? = nil) {
-        self.vm = vm
+        
+    init(_ product: Product? = nil) {
         self.product = product ?? Product.init()
     }
     
@@ -30,7 +27,7 @@ class ProductVM: ObservableObject {
     func operationHandling(_ operation: ProductVM.Operation) {
         switch operation {
         case .save:
-            try? self.vm?.saveProduct(self.product)
+            try? VM.share.saveProduct(self.product)
         case .delete:
             break
         }

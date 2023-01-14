@@ -18,29 +18,31 @@ struct ProductListView: View {
                 ProductCell(product: product).onTapGesture {
                     self.selectedProduct = product.wrappedValue
                 }.fullScreenCover(item: self.$selectedProduct) { selectedProduct in
-                    ProductEditorView.init(productVM: ProductVM.init(selectedProduct, vm: self.vm))
+                    ProductEditorView.init(productVM: ProductVM.init(selectedProduct))
                 }
             }
         }
     }
 }
 
-struct ProductCell: View {
+extension ProductListView {
     
-    @Binding var product: Product
-    
-    var body: some View {
-        VStack {
-            Row {
-                Text(self.product.name).font(.title)
-            } trailingContent: {
-                VStack(alignment: .trailing) {
-                    Text(self.product.periodDescription).foregroundColor(Color.gray)
-                    Text(String.init(format: "%.2f", self.product.price)).foregroundColor(Color.gray)
+    struct ProductCell: View {
+        @Binding var product: Product
+        var body: some View {
+            VStack {
+                Row {
+                    Text(self.product.name).font(.title)
+                } trailingContent: {
+                    VStack(alignment: .trailing) {
+                        Text(self.product.periodDescription).foregroundColor(Color.gray)
+                        Text(String.init(format: "%.2f", self.product.price)).foregroundColor(Color.gray)
+                    }
                 }
             }
         }
     }
+    
 }
 
 struct ProductListView_Previews: PreviewProvider {

@@ -15,7 +15,7 @@ struct ApM_Expense_CaculatorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView().environmentObject(VM())
+            MainView().environmentObject(VM.share)
         }
     }
 }

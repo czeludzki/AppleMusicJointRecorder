@@ -19,7 +19,7 @@ struct MemberListView: View {
                     MemberCell(member: m).onTapGesture {
                         self.selectedMember = m.wrappedValue
                     }.fullScreenCover(item: self.$selectedMember) { m in
-                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                        MemberEditorView.init(memberVM: MemberVM.init(m))
                     }
                 }
             }
@@ -28,7 +28,7 @@ struct MemberListView: View {
                     MemberCell(member: m).onTapGesture {
                         self.selectedMember = m.wrappedValue
                     }.fullScreenCover(item: self.$selectedMember) { m in
-                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                        MemberEditorView.init(memberVM: MemberVM.init(m))
                     }
                 }
             }
@@ -37,7 +37,7 @@ struct MemberListView: View {
                     MemberCell(member: m).onTapGesture {
                         self.selectedMember = m.wrappedValue
                     }.fullScreenCover(item: self.$selectedMember) { m in
-                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                        MemberEditorView.init(memberVM: MemberVM.init(m))
                     }
                 }
             }
@@ -46,7 +46,7 @@ struct MemberListView: View {
                     MemberCell(member: m).onTapGesture {
                         self.selectedMember = m.wrappedValue
                     }.fullScreenCover(item: self.$selectedMember) { m in
-                        MemberEditorView.init(memberVM: MemberVM.init(m, vm: self.vm))
+                        MemberEditorView.init(memberVM: MemberVM.init(m))
                     }
                 }
             }
@@ -56,8 +56,10 @@ struct MemberListView: View {
 
 struct MemberCell: View {
     
-    @State var isLatestDealRecordFold: Bool = false
+    @EnvironmentObject var vm: VM
     @Binding var member: Member
+    @State var isLatestDealRecordFold: Bool = false
+    @State var isRecordEditorViewPresent = false
     
     var body: some View {
         VStack {
@@ -104,11 +106,13 @@ struct MemberCell: View {
         .padding()
         .contextMenu {
             Button.init("Renew") {
-                
+                self.isRecordEditorViewPresent.toggle()
             }
             Button.init("Quit") {
-                
+                self.member.memberStatus = .quit
             }
+        }.fullScreenCover(isPresented: self.$isRecordEditorViewPresent) {
+            RecordEditorView.init(recordVM: .init(DealRecord.init(member: self.member)))
         }
     }
 }

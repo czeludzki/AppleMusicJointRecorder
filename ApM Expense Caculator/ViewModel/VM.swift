@@ -9,6 +9,8 @@ import Foundation
 
 class VM: ObservableObject {
     
+    static let share: VM = VM()
+    
     static let memberInfoFileName = "members.json"
     static let productInfoFileName = "products.json"
     
@@ -27,7 +29,7 @@ class VM: ObservableObject {
     
     var anyCancellabel: Set<AnyCancellable> = []
     
-    init() {
+    private init() {
         do {
             try self.createDataStoreFolderIfNeed()
         } catch let err as NSError {

@@ -39,9 +39,9 @@ struct RecordEditorView: View {
                 }
                 Section {
                     if let product = self.$recordVM.dealRecord.product {
-                        ProductCell.init(product: product)
+                        ProductListView.ProductCell.init(product: product)
                     } else {
-                        Text("Select Product")
+                        Text("Select a Product")
                     }
                 } header: {
                     HStack {

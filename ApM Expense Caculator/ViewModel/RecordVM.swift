@@ -17,11 +17,8 @@ class RecordVM: ObservableObject {
         case idel
     }
     
-    weak var vm: VM?
-    
-    init(_ dealRecord: DealRecord? = nil, member: Member, vm: VM? = nil) {
-        self.vm = vm
-        self.dealRecord = dealRecord ?? DealRecord.init(member: member)
+    init(_ dealRecord: DealRecord) {
+        self.dealRecord = dealRecord
     }
     
     @Published var dealRecord: DealRecord
@@ -29,7 +26,7 @@ class RecordVM: ObservableObject {
     func operationHandling(_ operation: MemberVM.Operation) {
         switch operation {
         case .save:
-            try? self.vm?.saveDealRecord(self.dealRecord)
+            try? VM.share.saveDealRecord(self.dealRecord)
         case .delete:
             break
         }

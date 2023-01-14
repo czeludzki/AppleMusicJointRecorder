@@ -26,7 +26,7 @@ struct MainView: View {
                         } label: {
                             Text("New Member")
                         }.fullScreenCover(isPresented: self.$isMemberEditorPresented) {
-                            MemberEditorView.init(memberVM: MemberVM.init(vm: self.vm))
+                            MemberEditorView.init(memberVM: MemberVM.init())
                         }
                     })
             }.tabItem {
@@ -45,7 +45,7 @@ struct MainView: View {
                                 Text("New Product")
                             }.fullScreenCover(isPresented: self.$isProductEditorPresented) {
                                 // 弹出视图
-                                ProductEditorView.init(productVM: ProductVM.init(vm: self.vm))
+                                ProductEditorView.init(productVM: ProductVM.init())
                             }
                         }
                     })

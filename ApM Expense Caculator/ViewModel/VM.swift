@@ -104,6 +104,11 @@ class VM: ObservableObject {
         }
     }
     
+    func memberQuit(_ member: Member) {
+        member.memberStatus = .quit
+        try? self.saveMember(member)
+    }
+    
     // 保存 Member
     func saveMember(_ newMember: Member) throws {
         // 如果已经存在, 就先移除旧的

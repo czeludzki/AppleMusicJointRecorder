@@ -108,8 +108,10 @@ struct MemberCell: View {
             Button.init("Renew") {
                 self.isRecordEditorViewPresent.toggle()
             }
-            Button.init("Quit") {
-                self.member.memberStatus = .quit
+            if self.member.memberStatus != .quit {
+                Button.init("Quit") {
+                    self.vm.memberQuit(self.member)
+                }
             }
         }.fullScreenCover(isPresented: self.$isRecordEditorViewPresent) {
             RecordEditorView.init(recordVM: .init(DealRecord.init(member: self.member)))
